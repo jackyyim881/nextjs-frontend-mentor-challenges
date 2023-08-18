@@ -1,0 +1,22 @@
+{
+  "options": [
+    {
+      "id": "service",
+      "label": "Online service",
+      "description": "Access to multiplayer games",
+      "price": "+$1/mo"
+    },
+    {
+      "id": "storage",
+      "label": "Larger storage",
+      "description": "Extra 1TB of cloud save",
+      "price": "+$2/mo"
+    },
+    {
+      "id": "profile",
+      "label": "Customizable Profile",
+      "description": "Custom theme on your profile",
+      "price": "+$2/mo"
+    }
+  ]
+}

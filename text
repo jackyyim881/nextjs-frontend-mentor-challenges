@@ -1,0 +1,127 @@
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import { useMultistepForm } from "./useMultistepForm";
+import PlanForm from "./planForm";
+import Information from "./information";
+import AddOns from "./addOns";
+import StepButton from "./stepButton";
+import Slides from "./slides";
+import { StepFormWrapper } from "./StepFormWrapper";
+import StepForm from "./stepForm";
+export default function Home() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log(formData);
+    // Now you can handle or send the data as you wish
+  };
+  const { steps, currentStepIndex, step, isLastStep, next, back, isFirstStep } =
+    useMultistepForm([<Information />, <PlanForm />, <AddOns />, <div>4</div>]);
+  return (
+    <>
+      <main className="flex min-h-screen  bg-red-200 flex-col items-center justify-center">
+        <div className="flex bg-white h-[700px]   p-5 relative  rounded-2xl  ">
+          <aside className="flex  w-96">
+            <Image
+              src="/bg-sidebar-desktop.svg"
+              width={300}
+              className="absolute  md:h-[650px] object-cover"
+              alt="Picture of the author"
+              height={300}
+            />
+            <form className="grid text-xs relative">
+              <div className=" left-10 relative">
+                <div className="grid grid-cols-2   relative mt-10">
+                  <label
+                    htmlFor="step1"
+                    className="h-10 w-10 border bg-light-blue text-marine-blue border-light-gray  rounded-3xl  flex items-center justify-center"
+                  >
+                    1
+                  </label>
+                  <div className="">
+                    <h1 className="text-cool-gray">STEP 1</h1>
+                    <h1 className="text-1xl font-bold mt-1 ">Personal info</h1>
+                  </div>
+                </div>
+                <div className="">
+                  <div className="grid grid-cols-2 relative mt-10">
+                    <label
+                      htmlFor="step2 "
+                      className="h-10 w-10  border border-light-gray  flex items-center justify-center    rounded-3xl "
+                    >
+                      2
+                    </label>
+                    <div>
+                      <h1 className="text-cool-gray">STEP 2 </h1>
+                      <h1 className="text-1xl font-bold mt-1 ">SELECT PLAN</h1>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 relative mt-10">
+                  <label
+                    htmlFor="step3"
+                    className="h-10 w-10 rounded-3xl border border-light-gray flex items-center justify-center"
+                  >
+                    3
+                  </label>
+                  <div className="">
+                    <h1 className="text-cool-gray">STEP 3 </h1>
+                    <h1 className="text-1xl font-bold  ">ADD-ONS</h1>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 relative mt-10">
+                  <label
+                    htmlFor="step4"
+                    className="h-10 w-10 rounded-3xl border border-light-gray flex items-center justify-center"
+                  >
+                    4
+                  </label>
+                  <div className="">
+                    <h1 className="text-cool-gray">STEP 4</h1>
+                    <h1 className="text-1xl font-bold ">SUMMARY</h1>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </aside>
+          <div>
+            {step}
+            <div className="flex justify-between     mt-10  items-center ">
+              <div>
+                {!isFirstStep && (
+                  <button
+                    type="button"
+                    className="  text-gray-500"
+                    onClick={back}
+                  >
+                    Go Back
+                  </button>
+                )}
+              </div>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+                onClick={next}
+              >
+                {isLastStep ? "Submit" : "Next Step"}
+              </button>
+              <div className=" text-black">
+                {currentStepIndex + 1} / {steps.length}
+              </div>
+            </div>
+          </div>
+        </div>
+        <StepForm />
+      </main>
+    </>
+  );
+}

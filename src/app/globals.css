@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer components {
+  .formBorder {
+    @apply border hover:border-marine-blue p-6 rounded-xl m-4 w-40;
+  }
+}
