@@ -1,32 +1,39 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useRef } from "react";
 
 export function useMultistepForm(steps: ReactElement[]) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [activeColor, setActiveColor] = useState(steps.map(() => false));
+  const [activeColor, setActiveColor] = useState(steps.map(() => true) as any);
 
   const stepsInfo = [" Personal info", " Add-ons", " Plan", " Summary"];
 
-  const updateActiveColor = (index: number | null) => {
-    setActiveColor(activeColor.map((_, i) => i === index));
-  };
+  const r = useRef(1);
 
   function next() {
     setCurrentStepIndex((i: any) => {
       if (i >= steps.length - 1) return i;
-      updateActiveColor(i + 1);
+      r.current = i + 1;
+      console.log(`r.current:${r.current + 1}`);
       return i + 1;
     });
   }
+  function setActiveNextColorHandler() {
+    setActiveColor((prevIndex: any) => prevIndex + 1);
+  }
+  function setActivePrevColorHandler() {
+    setActiveColor((prevIndex: any) => prevIndex - 1);
+  }
+
   function back() {
     setCurrentStepIndex((i: any) => {
       if (i <= 0) return i;
-      updateActiveColor(i - 1);
+      setActiveColor((prevIndex: any) => prevIndex - 1);
+      r.current = i - 0;
+      console.log(`r.current:${r.current} `);
       return i - 1;
     });
   }
   function goTo(index: number) {
     setCurrentStepIndex(index);
-    updateActiveColor(index);
   }
   return {
     currentStepIndex,
@@ -36,7 +43,11 @@ export function useMultistepForm(steps: ReactElement[]) {
     isFirstStep: currentStepIndex === 0,
     isLastStep: currentStepIndex === steps.length - 1,
     back,
+
     next,
+    setActiveColor,
+    setActiveNextColorHandler,
+    setActivePrevColorHandler,
     goTo,
   };
 }

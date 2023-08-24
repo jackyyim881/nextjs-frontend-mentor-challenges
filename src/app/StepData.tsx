@@ -8,7 +8,7 @@ export const stepData: Data[] = [
   {
     stepId: 1,
     stepNumber: "STEP 1",
-    stepDescription: "Personal info",
+    stepDescription: "YOUR INFO",
   },
   {
     stepId: 2,

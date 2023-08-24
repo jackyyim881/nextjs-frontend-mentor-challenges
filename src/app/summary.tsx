@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "../../node_modules/next/link";
 
-export default function Summary() {
+export function Summary() {
   return (
     <>
       <div className="flex flex-col">

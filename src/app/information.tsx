@@ -2,24 +2,23 @@
 import React from "react";
 import { useState } from "react";
 import StepButton from "./stepButton";
-export default function Information() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
-  const handleChange = (e: any) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log(formData);
-    // Now you can handle or send the data as you wish
-  };
+type UserData = {
+  name: string;
+  email: string;
+  phone: string;
+};
+type UserFormProps = UserData & {
+  updateFields: (fields: Partial<UserData>) => void;
+};
+export function Information({
+  name,
+  email,
+  phone,
+  updateFields,
+}: UserFormProps) {
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-col">
+      <div className="flex flex-col">
         <div className=" relative gap-2  mt-10   mr-14 ">
           <h1 className="font-bold text-3xl     text-blue-950">
             Personal info
@@ -35,7 +34,8 @@ export default function Information() {
                 id="name"
                 placeholder="e.g. Stephen King"
                 className="w-96 p-2 border-gray-400 border text-gray-950"
-                onChange={handleChange}
+                value={name}
+                onChange={(e) => updateFields({ name: e.target.value })}
               />
             </div>
           </div>
@@ -46,8 +46,9 @@ export default function Information() {
                 type="email"
                 id="email"
                 placeholder="e.g. stephenking@lorem.com"
-                onChange={handleChange}
                 className="w-96 p-2 border-gray-400 border text-gray-950"
+                value={email}
+                onChange={(e) => updateFields({ email: e.target.value })}
               />{" "}
             </div>
           </div>{" "}
@@ -55,7 +56,7 @@ export default function Information() {
             <div className="flex justify-between	">
               <span className="text-sky-900">Phone Number</span>
 
-              {formData.phone.length < 1 && (
+              {phone.length < 1 && (
                 <span className="text-red-500 ">This field is required</span>
               )}
             </div>
@@ -64,11 +65,27 @@ export default function Information() {
               id="phone"
               placeholder="e.g. +1 234 567 890"
               className="w-96 p-2 border-gray-400 border text-gray-950"
-              onChange={handleChange}
+              value={phone}
+              onChange={(e) => updateFields({ phone: e.target.value })}
             />
           </div>
         </div>
-      </form>
+      </div>
     </>
   );
 }
+
+// const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     phone: "",
+//   });
+//   const handleChange = (e: any) => {
+//     setFormData({ ...formData, [e.target.id]: e.target.value });
+//   };
+
+//   const handleSubmit = (e: any) => {
+//     e.preventDefault();
+//     console.log(formData);
+//     // Now you can handle or send the data as you wish
+//   };
