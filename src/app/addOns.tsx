@@ -46,46 +46,46 @@ export function AddOns({ updateFields, addons }: AddOnsDataProp) {
 
   return (
     <>
-      <div className="text-black max-w-full space-y-10">
-        <div className="mt-5">
+      <div className="text-black right-size md:w-[650px] space-y-5">
+        <div className=" flex flex-col">
           <label className="text-3xl font-bold">Pick add-ons</label>
           <div className="text-1xl text-gray-500 mt-2">
             Add-ons help enhance your gaming experience.
           </div>
         </div>
-
-        {options.map((option) => (
-          <div
-            className="flex justify-between rounded-md border-2 p-4 hover:border-slate-900 focus:rounded-lg"
-            key={option.id}
-            aria-label={`${option.id} option`}
-          >
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="addons"
-                name="options"
-                className="form-checkbox text-indigo-600"
-                value={option.label}
-                aria-label={`${option.id} option`}
-                onChange={() => handleClicked(option)}
-              />
-              <ul className="relative left-4">
-                <li className="flex">
-                  <div className="flex flex-col">
-                    <label htmlFor={option.id} className="font-bold">
-                      {option.label}
-                    </label>
-                    <span className=" text-gray-500">{option.description}</span>
-                  </div>
-                </li>
-              </ul>
+        <div className=" space-y-5  max-w-[500px]">
+          {options.map((option) => (
+            <div
+              className="flex justify-between rounded-md border-2 p-4 hover:border-purplish-blue cursor-pointer hover:text-purplish-blue focus:rounded-lg"
+              key={option.id}
+              aria-label={`${option.id} option`}
+            >
+              <div className="flex items-center ">
+                <input
+                  type="checkbox"
+                  id={option.id}
+                  name="options"
+                  className="form-checkbox text-indigo-600"
+                  value={option.label}
+                  onChange={() => handleClicked(option)}
+                />
+                <ul className="relative left-4">
+                  <li className="flex">
+                    <div className="flex flex-col">
+                      <label htmlFor={option.id} className="font-bold">
+                        {option.label}
+                      </label>
+                      <span className=" text-gray-500">
+                        {option.description}
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div className="flex items-center ">{option.price}</div>
             </div>
-            <div className="flex items-center text-marine-blue">
-              {option.price}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );

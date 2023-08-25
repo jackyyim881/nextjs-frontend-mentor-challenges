@@ -25,10 +25,14 @@ const config: Config = {
       "4xl": "2.441rem",
       "5xl": "3.052rem",
     },
+    screens: {
+      mobile: "375px",
+    },
     extend: {
       colors: {
         "cool-gray": "hsl(231, 11%, 63%)",
         "light-gray": "hsl(229, 24%, 87%)",
+        "purplish-blue": "hsl(243, 100%, 62%)",
         magnolia: "hsl(217, 100%, 97%)",
         "marine-blue": "hsl(213, 96%, 18%)",
         alabaster: "hsl(231, 100%, 99%)",
